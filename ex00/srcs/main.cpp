@@ -5,40 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:39:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/05/17 19:52:45 by yabukirento      ###   ########.fr       */
+/*   Created: 2025/06/06 22:54:13 by yabukirento       #+#    #+#             */
+/*   Updated: 2025/06/06 22:58:15 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
+#include "../includes/whatever.hpp"
 
-int main() {
-    const char* testInputs[] = {
-        "'a'",      // char literal
-        "0",        // int
-        "42",       // int
-        "127",      // int (最大表示可能char)
-        "-42",      // int
-        "4.2f",     // float
-        "-4.2f",    // float
-        "nanf",     // float pseudo
-        "+inff",    // float pseudo
-        "-inff",    // float pseudo
-        "4.2",      // double
-        "-4.2",     // double
-        "nan",      // double pseudo
-        "+inf",     // double pseudo
-        "-inf",     // double pseudo
-        "999999999999999999999999999999", // int overflow
-        "hello",    // invalid input
-        NULL        // 終端マーカー
-    };
-
-    for (int i = 0; testInputs[i] != NULL; ++i) {
-        std::cout << "===== Test " << i + 1 << ": \"" << testInputs[i] << "\" =====" << std::endl;
-        ScalarConverter::convert(testInputs[i]);
-        std::cout << std::endl;
-    }
-
+int main( void )
+{
+    int a = 2;
+    int b = 3;
+    ::swap( a, b );
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+    std::string c = "chaine1";
+    std::string d = "chaine2";
+    ::swap(c, d);
+    std::cout << "c = " << c << ", d = " << d << std::endl;
+    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
     return 0;
 }
