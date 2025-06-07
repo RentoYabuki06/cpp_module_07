@@ -6,39 +6,33 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:39:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/05/17 19:52:45 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/06/08 08:58:23 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
+#include <iostream>
+#include "../includes/Iter.hpp"
+
+void printInt(int const& x) {
+    std::cout << x << " ";
+}
+
+template <typename T>
+void printTemplate(const T& val) {
+    std::cout << val << " ";
+}
 
 int main() {
-    const char* testInputs[] = {
-        "'a'",      // char literal
-        "0",        // int
-        "42",       // int
-        "127",      // int (最大表示可能char)
-        "-42",      // int
-        "4.2f",     // float
-        "-4.2f",    // float
-        "nanf",     // float pseudo
-        "+inff",    // float pseudo
-        "-inff",    // float pseudo
-        "4.2",      // double
-        "-4.2",     // double
-        "nan",      // double pseudo
-        "+inf",     // double pseudo
-        "-inf",     // double pseudo
-        "999999999999999999999999999999", // int overflow
-        "hello",    // invalid input
-        NULL        // 終端マーカー
-    };
+    int arr[] = {1, 2, 3, 4, 5};
+    std::string strs[] = {"Hello", "42", "Tokyo"};
 
-    for (int i = 0; testInputs[i] != NULL; ++i) {
-        std::cout << "===== Test " << i + 1 << ": \"" << testInputs[i] << "\" =====" << std::endl;
-        ScalarConverter::convert(testInputs[i]);
-        std::cout << std::endl;
-    }
+    std::cout << "Integers: ";
+    iter(arr, 5, printInt);
+    std::cout << std::endl;
+
+    std::cout << "Strings: ";
+    iter(strs, 3, printTemplate<std::string>);
+    std::cout << std::endl;
 
     return 0;
 }
