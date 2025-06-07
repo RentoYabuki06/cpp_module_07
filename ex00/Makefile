@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/17 18:39:17 by yabukirento       #+#    #+#              #
-#    Updated: 2025/06/04 21:40:24 by yabukirento      ###   ########.fr        #
+#    Updated: 2025/06/07 15:23:09 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Wshadow -g
 INCLUDES = -I includes
 
-SRCS =	srcs/main.cpp \ 
-
+SRCS = srcs/main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -26,7 +25,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
