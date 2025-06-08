@@ -6,38 +6,42 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:39:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/05/17 19:52:45 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/06/08 09:10:03 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
+#include <iostream>
+#include "../includes/Array.hpp"
 
 int main() {
-    const char* testInputs[] = {
-        "'a'",      // char literal
-        "0",        // int
-        "42",       // int
-        "127",      // int (最大表示可能char)
-        "-42",      // int
-        "4.2f",     // float
-        "-4.2f",    // float
-        "nanf",     // float pseudo
-        "+inff",    // float pseudo
-        "-inff",    // float pseudo
-        "4.2",      // double
-        "-4.2",     // double
-        "nan",      // double pseudo
-        "+inf",     // double pseudo
-        "-inf",     // double pseudo
-        "999999999999999999999999999999", // int overflow
-        "hello",    // invalid input
-        NULL        // 終端マーカー
-    };
+    try {
+        Array<int> a(5);
+        for (unsigned int i = 0; i < a.size(); ++i)
+            a[i] = i * 10;
 
-    for (int i = 0; testInputs[i] != NULL; ++i) {
-        std::cout << "===== Test " << i + 1 << ": \"" << testInputs[i] << "\" =====" << std::endl;
-        ScalarConverter::convert(testInputs[i]);
+        std::cout << "Array a: ";
+        for (unsigned int i = 0; i < a.size(); ++i)
+            std::cout << a[i] << " ";
         std::cout << std::endl;
+
+        Array<int> b = a;
+        b[0] = 999;
+
+        std::cout << "Array a after b modified: ";
+        for (unsigned int i = 0; i < a.size(); ++i)
+            std::cout << a[i] << " ";
+        std::cout << std::endl;
+
+        std::cout << "Array b: ";
+        for (unsigned int i = 0; i < b.size(); ++i)
+            std::cout << b[i] << " ";
+        std::cout << std::endl;
+
+        std::cout << "Access out-of-bounds: ";
+        std::cout << a[100] << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Caught exception: " << e.what() << std::endl;
     }
 
     return 0;
