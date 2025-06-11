@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:34:51 by yabukirento       #+#    #+#             */
-/*   Updated: 2025/06/08 09:10:31 by yabukirento      ###   ########.fr       */
+/*   Updated: 2025/06/11 14:32:43 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 #include <stdexcept>
 #include <cstddef>
+
+class OutOfBoundsException : public std::exception {
+public:
+    const char* what() const throw() {
+        return "Array: Index out of bounds";
+    }
+};
 
 template <typename T>
 class Array {
@@ -37,24 +44,22 @@ public:
 
     Array& operator=(const Array& other) {
         if (this != &other) {
-            delete[] _data;
-            _size = other._size;
-            _data = new T[_size];
-            for (std::size_t i = 0; i < _size; ++i)
-                _data[i] = other._data[i];
+            Array tmp(other);
+            std::swap(_data, tmp._data);
+            std::swap(_size, tmp._size);
         }
         return *this;
     }
 
     T& operator[](std::size_t index) {
         if (index >= _size)
-            throw std::out_of_range("Index out of bounds");
+            throw OutOfBoundsException();
         return _data[index];
     }
 
     const T& operator[](std::size_t index) const {
         if (index >= _size)
-            throw std::out_of_range("Index out of bounds");
+            throw OutOfBoundsException();
         return _data[index];
     }
 
